@@ -3,221 +3,174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CJ대한통운 대량조회기 - kkddss Secret 2025 Ver.</title>
+<title>CJ대한통운 대량조회기 - kkddss Secret - 2025 Ver. </title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-  body{font-family:'Malgun Gothic',sans-serif;background:linear-gradient(135deg,#003b7f,#0066cc);margin:0;padding:0;min-height:100vh;color:#333;}
-  .container{max-width:1160px;margin:20px auto;background:white;border-radius:15px;box-shadow:0 15px 40px rgba(0,0,0,0.4);overflow:hidden;}
-  .header{background:#003b7f;color:white;padding:28px;text-align:center;font-size:28px;font-weight:bold;}
-  .header small{display:block;font-size:15px;margin-top:10px;opacity:0.9;}
-  .input-area{padding:35px;background:#f8fbff;text-align:center;}
-  textarea{width:96%;max-width:960px;height:220px;border:2px solid #003b7f;border-radius:12px;padding:18px;font-size:17px;outline:none;}
-  .btn{margin-top:20px;padding:18px 48px;background:#003b7f;color:white;border:none;border-radius:50px;font-size:19px;cursor:pointer;box-shadow:0 6px 20px rgba(0,59,127,0.5);}
-  .btn:hover{background:#002b5f;transform:translateY(-3px);}
-  .result-area{padding:35px;min-height:400px;}
-  .log{text-align:center;padding:20px;background:#e3f2fd;color:#00695c;font-weight:bold;border-radius:12px;margin-bottom:30px;font-size:19px;}
-  table{width:100%;border-collapse:collapse;margin-top:20px;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
-  th{background:#003b7f;color:white;padding:16px;font-size:16px;}
-  td{padding:14px;border-bottom:1px solid #eee;text-align:center;}
-  .status-done{background:#e8f5e8 !important;color:#1b5e20;}
-  .status-ing{background:#fff8e1 !important;color:#e65100;}
-  .status-wait{background:#e1f5fe !important;color:#01579b;}
-  .status-fail{background:#ffebee !important;color:#c62828;}
-  .detail-btn{background:none;border:none;color:#003b7f;font-weight:bold;cursor:pointer;text-decoration:underline;font-size:15px;}
-  .detail-box{margin:35px 0;padding:30px;background:#f8fbff;border:3px solid #003b7f;border-radius:15px;display:none;}
-  .delivery-step{display:flex;justify-content:space-between;margin:30px 0;position:relative;height:90px;align-items:center;}
-  .delivery-step::before{content:'';position:absolute;top:44px;left:5%;right:5%;height:8px;background:#ddd;z-index:1;}
-  .delivery-step::after{content:'';position:absolute;top:44px;left:5%;height:8px;background:#003b7f;z-index:2;width:var(--progress,0%);}
-  .step{flex:1;text-align:center;z-index:3;}
-  .circle{width:56px;height:56px;border-radius:50%;background:#ddd;color:#666;margin:0 auto 12px;line-height:56px;font-weight:bold;font-size:20px;}
-  .step.on .circle{background:#003b7f;color:white;}
-  .step-label{font-size:14px;color:#444;font-weight:bold;}
-  .track-table{width:100%;margin-top:25px;border-collapse:collapse;}
-  .track-table th{background:#003b7f;color:white;}
-  .track-table td{padding:12px;border:1px solid #ddd;}
-  .btn-group{text-align:center;margin:50px 0;}
-  .btn-save{padding:16px 40px;margin:12px;border:none;border-radius:50px;color:white;font-size:18px;cursor:pointer;}
-  .csv{background:#43a047;}
-  .excel{background:#fb8c00;}
-  footer{text-align:center;padding:25px;color:white;font-size:13px;background:#003b7f;}
-  .copy-notice{position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.7);color:white;padding:8px 12px;border-radius:8px;font-size:12px;opacity:0.6;}
+  body {font-family:'Malgun Gothic',sans-serif;background:linear-gradient(135deg,#003b7f,#0066cc);margin:0;padding:0;min-height:100vh;color:#333;}
+  .container {max-width:1100px;margin:20px auto;background:white;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.3);overflow:hidden;}
+  .header {background:#003b7f;color:white;padding:25px;text-align:center;font-size:26px;font-weight:bold;}
+  .header small {display:block;font-size:14px;margin-top:8px;opacity:0.9;}
+  .input-area {padding:30px;background:#f8fbff;text-align:center;}
+  textarea {width:95%;max-width:900px;height:200px;border:2px solid #003b7f;border-radius:10px;padding:15px;font-size:16px;}
+  .btn {margin-top:15px;padding:16px 40px;background:#003b7f;color:white;border:none;border-radius:50px;font-size:18px;cursor:pointer;box-shadow:0 5px 15px rgba(0,59,127,0.4);}
+  .btn:hover {background:#002b5f;transform:translateY(-2px);}
+  .result-area {padding:30px;min-height:300px;}
+  .log {text-align:center;padding:18px;background:#e3f2fd;color:#00695c;font-weight:bold;border-radius:10px;margin-bottom:25px;font-size:18px;}
+  table {width:100%;border-collapse:collapse;margin-top:15px;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+  th {background:#003b7f;color:white;padding:15px;}
+  td {padding:12px;border-bottom:1px solid #eee;text-align:center;}
+  .status-done {background:#e8f5e8 !important;color:#1b5e20;font-weight:bold;}
+  .status-ing {background:#fff8e1 !important;color:#e65100;font-weight:bold;}
+  .status-wait {background:#e1f5fe !important;color:#01579b;}
+  .status-fail {background:#ffebee !important;color:#c62828;}
+  .detail-btn {background:none;border:none;color:#003b7f;font-weight:bold;cursor:pointer;text-decoration:underline;}
+  .detail-box {margin:30px 0;padding:25px;background:#f8fbff;border:2px solid #003b7f;border-radius:12px;display:none;}
+  .delivery-step {display:flex;justify-content:space-between;margin:25px 0;position:relative;height:80px;align-items:center;}
+  .delivery-step::before {content:'';position:absolute;top:40px;left:5%;right:5%;height:6px;background:#ddd;z-index:1;}
+  .delivery-step::after {content:'';position:absolute;top:40px;left:5%;height:6px;background:#003b7f;z-index:2;width:var(--progress,0%);}
+  .step {flex:1;text-align:center;z-index:3;}
+  .circle {width:50px;height:50px;border-radius:50%;background:#ddd;color:#666;margin:0 auto 10px;line-height:50px;font-weight:bold;font-size:18px;}
+  .step.on .circle {background:#003b7f;color:white;}
+  .step-label {font-size:13px;color:#444;}
+  .track-table {width:100%;margin-top:20px;border-collapse:collapse;}
+  .track-table th {background:#003b7f;color:white;}
+  .track-table td {padding:10px;border:1px solid #ddd;}
+  .btn-group {text-align:center;margin:40px 0;}
+  .btn-save {padding:14px 35px;margin:10px;border:none;border-radius:50px;color:white;font-size:16px;cursor:pointer;}
+  .csv {background:#43a047;}
+  .excel {background:#fb8c00;}
+  footer {text-align:center;padding:20px;color:white;font-size:12px;}
 </style>
 </head>
-<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-
+<body>
 <div class="container">
   <div class="header">
-    CJ대한통운 실시간 대량조회 - kkddss Secret 2025 Ver.
-    <small>2025년 11월 최신 API 완벽 적용 · 전 세계 어디서나 접속 · 상세이력 포함 · 엑셀/CSV 저장</small>
+    CJ대한통운 실시간 대량조회 - kkddss Secret - 2025 Ver.
+    <small>전 세계 어디서나 접속 · 상세이력 포함 · 엑셀/CSV 저장 (API 기반)</small>
   </div>
-
+ 
   <div class="input-area">
-    <textarea id="numbers" placeholder="송장번호를 한 줄에 하나씩 입력하세요 (최대 500건)&#10;예시:&#10;694756249341&#10;694756249352"></textarea><br>
-    <button class="btn" onclick="start()">조회 시작 (2025 최신 API 적용)</button>
+    <textarea id="numbers" placeholder="송장번호를 한 줄에 하나씩 입력하세요 (최대 500건)&#10;예시:&#10;475959272641&#10;344156485712"></textarea><br>
+    <button class="btn" onclick="start()">조회 시작 (2025 API 버전)</button>
   </div>
-
+ 
   <div class="result-area">
     <div id="log" class="log">송장번호를 입력하고 [조회 시작] 버튼을 눌러주세요</div>
     <div id="result"></div>
   </div>
 </div>
-
-<footer>CJ대한통운 대량조회 전용 툴 · 2025년 11월 최신 버전 · 언제 어디서나 무료 사용 가능</footer>
-<div class="copy-notice">kkddss Secret 2025 Ver. — 무단 배포 금지</div>
-
+<footer>
+  CJ대한통운 대량조회 전용 사이트 · 언제 어디서나 무료 사용 가능
+</footer>
 <script>
 let allResults = [];
-
 async function query(num) {
-  const apiUrl = "https://trace.cjlogistics.com/next/api/trackingList";
+  const url = `https://apis.tracker.delivery/carriers/kr.cjlogistics/tracks/${num}`;
   try {
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Origin": "https://trace.cjlogistics.com",
-        "Referer": "https://trace.cjlogistics.com/"
-      },
-      body: JSON.stringify({ wblNum: num.trim(), paramLang: "kor" })
-    });
-
-    if (!response.ok) throw new Error("HTTP " + response.status);
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('API 응답 오류');
+    }
     const data = await response.json();
-
-    if (data.result !== "SUCCESS" || !data.trackingInfo || data.trackingInfo.length === 0) {
-      return { status: "조회불가", location: "정보없음", progress: 0, tracks: [] };
-    }
-
-    const info = data.trackingInfo[0];
-    const last = data.trackingInfo[data.trackingInfo.length - 1];
-
-    let status = "알수없음";
-    let location = "정보없음";
+    
+    let status = data.state ? data.state.text : "조회불가";
+    let location = data.progresses && data.progresses.length > 0 ? data.progresses[data.progresses.length - 1].location.name : "정보없음";
     let progress = 0;
-
-    switch (info.crgStsCd) {
-      case "01": status = "상품접수"; progress = 15; location = "접수 완료"; break;
-      case "02": status = "집하 완료"; progress = 30; location = last.orgNm || "집하처리중"; break;
-      case "03": status = "이동중"; progress = 50; location = (last.orgNm || "") + " → " + (last.dstnOrgNm || ""); break;
-      case "04": status = "터미널 도착"; progress = 75; location = last.dstnOrgNm || "터미널"; break;
-      case "05": status = "배송출발"; progress = 90; location = "배송 중"; break;
-      case "06": status = "배송완료"; progress = 100; location = "고객님 댁"; break;
-      default: status = info.crgStsNm || "알수없음"; location = last.orgNm || "정보없음";
-    }
-
-    const tracks = data.trackingInfo.map(t => ({
-      date: t.regDt?.replace(/-/g, ".") || "",
-      time: t.regTm || "",
-      place: t.orgNm || "",
-      desc: t.crgStsNm + (t.dstnOrgNm && t.dstnOrgNm !== t.orgNm ? " (" + t.dstnOrgNm + ")" : "")
-    })).reverse().slice(0, 30);
-
-    return { status, location, progress, tracks };
-
+    if (status.includes('배송완료')) progress = 100;
+    else if (status.includes('배송출발') || status.includes('배송 중')) progress = 90;
+    else if (status.includes('도착')) progress = 75;
+    else if (status.includes('이동중')) progress = 50;
+    else if (status.includes('집화') || status.includes('입고')) progress = 30;
+    else if (status.includes('접수')) progress = 15;
+    
+    const tracks = data.progresses ? data.progresses.map(p => ({
+      date: p.time.split('T')[0],  // YYYY-MM-DD
+      time: p.time.split('T')[1].split('+')[0],  // HH:MM:SS
+      place: p.location.name,
+      desc: `${p.status.text} - ${p.description || ''}`
+    })) : [];
+    
+    return {status, location, progress, tracks};
   } catch (e) {
-    console.error("Query error:", num, e);
-    return { status: "조회실패", location: "네트워크 오류", progress: 0, tracks: [] };
+    console.error("Query error:", e);
+    return {status:"조회불가", location:"네트워크 오류", progress:0, tracks:[]};
   }
 }
-
 async function start() {
   const input = document.getElementById("numbers").value.trim();
   if (!input) return alert("송장번호를 입력해주세요!");
-  
-  const nums = input.split("\n").map(x => x.trim()).filter(x => x && /^\d{10,14}$/.test(x));
-  if (nums.length === 0) return alert("유효한 송장번호가 없습니다!");
-
+  const nums = input.split("\n").map(x=>x.trim()).filter(x=>x);
+ 
   document.getElementById("result").innerHTML = `<table id="tbl"><tr><th>순번</th><th>송장번호</th><th>상태</th><th>현재위치</th><th>상세보기</th></tr></table>`;
   document.getElementById("log").innerHTML = `<div class="log">조회 시작중... (0/${nums.length})</div>`;
   allResults = [];
   const table = document.getElementById("tbl");
-
   for (let i = 0; i < nums.length; i++) {
     document.getElementById("log").innerHTML = `<div class="log">조회 중 → ${nums[i]} (${i+1}/${nums.length})</div>`;
     const res = await query(nums[i]);
-    
+   
     allResults.push({
       순번: i+1,
       송장번호: nums[i],
       상태: res.status,
       위치: res.location,
-      상세이력: res.tracks.map(t => `${t.date} ${t.time} | ${t.place} | ${t.desc}`).join("\n")
+      상세이력: res.tracks.map(t=>`${t.date} ${t.time} | ${t.place} | ${t.desc}`).join("\n")
     });
-
     const row = table.insertRow();
-    const rowClass = res.status.includes("완료") ? "status-done" :
-                     res.status.includes("출발") || res.status.includes("도착") ? "status-ing" :
-                     res.status.includes("이동중") || res.status.includes("집하") ? "status-ing" :
-                     res.status.includes("접수") ? "status-wait" : "status-fail";
-    row.className = rowClass;
+    row.className = res.status.includes("완료") ? "status-done" : 
+                    (res.status.includes("출발") || res.status.includes("도착") || res.status.includes("발송중") || res.status.includes("집하")) ? "status-ing" : 
+                    "status-wait";
+    if (res.status === "조회불가" || res.status === "조회실패") row.className = "status-fail";
     row.innerHTML = `<td>${i+1}</td><td><strong>${nums[i]}</strong></td><td>${res.status}</td><td>${res.location}</td>
-                     <td><button class="detail-btn" onclick="showDetail(${i})">상세보기</button></td>`;
-
-    // 속도 조절 (너무 빠르면 차단될 수 있음)
-    if (i < nums.length - 1) await new Promise(r => setTimeout(r, Math.random() * 500 + 300));
+      <td><button class="detail-btn" onclick="showDetail(${i})">상세보기</button></td>`;
+   
+    await new Promise(r=>setTimeout(r, Math.random()*900+700));  // 딜레이
   }
-
   document.getElementById("log").innerHTML = `<div class="log" style="background:#d4edda;color:green;">조회 완료! (${nums.length}건 처리됨)</div>`;
-  document.getElementById("result").innerHTML += `
-    <div class="btn-group">
-      <button class="btn-save csv" onclick="saveCSV()">CSV 저장</button>
-      <button class="btn-save excel" onclick="saveExcel()">엑셀 저장 (상세이력 포함)</button>
-    </div>`;
+  document.getElementById("result").innerHTML += `<div class="btn-group">
+    <button class="btn-save csv" onclick="saveCSV()">CSV 저장</button>
+    <button class="btn-save excel" onclick="saveExcel()">엑셀 저장 (상세이력 포함)</button>
+  </div>`;
 }
-
 function showDetail(i) {
-  document.querySelectorAll(".detail-box").forEach(d => d.remove());
+  document.querySelectorAll(".detail-box").forEach(d=>d.remove());
   const d = allResults[i];
   const progress = d.상태.includes("완료")?100:d.상태.includes("출발")?90:d.상태.includes("도착")?75:50;
-  
-  const html = `
-    <div class="detail-box" style="display:block">
-      <h3>운송장번호: ${d.송장번호} → ${d.상태}</h3>
-      <div class="delivery-step" style="--progress:${progress}%">
-        <div class="step ${progress>=15?'on':''}"><div class="circle">1</div><div class="step-label">접수</div></div>
-        <div class="step ${progress>=30?'on':''}"><div class="circle">2</div><div class="step-label">집하</div></div>
-        <div class="step ${progress>=50?'on':''}"><div class="circle">3</div><div class="step-label">이동중</div></div>
-        <div class="step ${progress>=75?'on':''}"><div class="circle">4</div><div class="step-label">터미널 도착</div></div>
-        <div class="step ${progress>=90?'on':''}"><div class="circle">5</div><div class="step-label">배송출발</div></div>
-        <div class="step ${progress>=100?'on':''}"><div class="circle">6</div><div class="step-label">배송완료</div></div>
-      </div>
-      <table class="track-table">
-        <tr><th>일자</th><th>시간</th><th>위치</th><th>내용</th></tr>
-        ${d.상세이력 ? d.상세이력.split("\n").map(l => {
-          const parts = l.split(" | ");
-          return `<tr><td>${parts[0]||""}</td><td>${parts[1]||""}</td><td>${parts[2]||""}</td><td style="text-align:left">${parts.slice(3).join(" | ")||""}</td></tr>`;
-        }).join("") : "<tr><td colspan=4>내역 없음</td></tr>"}
-      </table>
-      <div style="text-align:right;margin-top:20px">
-        <button class="btn" style="padding:12px 30px;font-size:15px" onclick="this.parentElement.parentElement.remove()">닫기</button>
-      </div>
-    </div>`;
+ 
+  const html = `<div class="detail-box" style="display:block">
+    <h3>운송장번호: ${d.송장번호} → ${d.상태}</h3>
+    <div class="delivery-step" style="--progress:${progress}%">
+      <div class="step ${progress>=15?'on':''}"><div class="circle">1</div><div class="step-label">접수</div></div>
+      <div class="step ${progress>=30?'on':''}"><div class="circle">2</div><div class="step-label">집하</div></div>
+      <div class="step ${progress>=50?'on':''}"><div class="circle">3</div><div class="step-label">이동중</div></div>
+      <div class="step ${progress>=75?'on':''}"><div class="circle">4</div><div class="step-label">도착</div></div>
+      <div class="step ${progress>=90?'on':''}"><div class="circle">5</div><div class="step-label">출발</div></div>
+      <div class="step ${progress>=100?'on':''}"><div class="circle">6</div><div class="step-label">완료</div></div>
+    </div>
+    <table class="track-table"><tr><th>일자</th><th>시간</th><th>위치</th><th>내용</th></tr>
+      ${d.상세이력 ? d.상세이력.split("\n").map(l=> {
+        const [dt, tm, pl, ...desc] = l.split(" | ");
+        return `<tr><td>${dt||""}</td><td>${tm||""}</td><td>${pl||""}</td><td style="text-align:left">${desc.join(" | ")||""}</td></tr>`;
+      }).join("") : "<tr><td colspan=4>내역 없음</td></tr>"}
+    </table>
+    <div style="text-align:right;margin-top:15px"><button class="btn" style="padding:10px 25px;font-size:14px" onclick="this.parentElement.parentElement.remove()">닫기</button></div>
+  </div>`;
   document.getElementById("result").insertAdjacentHTML("beforeend", html);
 }
-
 function saveCSV() {
-  let csv = "\uFEFF순번,송장번호,상태,위치,상세이력\n" + 
-    allResults.map(r => `${r.순번},"${r.송장번호}","${r.상태}","${r.위치}","${r.상세이력.replace(/"/g,'""')}"`).join("\n");
+  let csv = "\uFEFF순번,송장번호,상태,위치,상세이력\n" + allResults.map(r=>`${r.순번},"${r.송장번호}","${r.상태}","${r.위치}","${r.상세이력.replace(/"/g,'""')}"`).join("\n");
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(new Blob([csv], {type: "text/csv;charset=utf-8"}));
+  a.href = URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
   a.download = `CJ대한통운_조회결과_${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
 }
-
 function saveExcel() {
-  const data = allResults.map(r => ({
-    순번: r.순번,
-    송장번호: r.송장번호,
-    상태: r.상태,
-    현재위치: r.위치,
-    상세이력: r.상세이력
-  }));
+  const data = allResults.map(r=>({순번:r.순번,송장번호:r.송장번호,상태:r.상태,현재위치:r.위치,상세이력:r.상세이력}));
   const wb = XLSX.utils.book_new();
   const ws = XLSX.utils.json_to_sheet(data);
-  ws["!cols"] = [{wch:8},{wch:17},{wch:13},{wch:25},{wch:100}];
-  XLSX.utils.book_append_sheet(wb, ws, "CJ대한통운");
-  XLSX.writeFile(wb, `CJ대한통운_조회결과_${new Date().toISOString().slice(0,10)}.xlsx`);
+  ws["!cols"] = [{wch:8},{wch:16},{wch:12},{wch:20},{wch:90}];
+  XLSX.utils.book_append_sheet(wb,ws,"CJ대한통운");
+  XLSX.writeFile(wb,`CJ대한통운_조회결과_${new Date().toISOString().slice(0,10)}.xlsx`);
 }
 </script>
 </body>
